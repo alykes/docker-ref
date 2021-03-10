@@ -83,7 +83,7 @@ To see which ports the docker container is mapping too
 _output:_ 8080/tcp -> 0.0.0.0:8080
 _Explanation:_ 8080 on the container will map to 8080 on the host
 
-###Swarm Mode
+### Swarm Mode
 
 On the first manager, initialise the Swarm
 `docker swarm init`
@@ -152,7 +152,7 @@ To rejoin a manager to the swarm when the docker service is restarted, you need 
   - the provide the key
 (workers are not affected)
 
-###Docker Networking
+### Docker Networking
 List the Networks
 `docker network ls`
 
@@ -188,7 +188,7 @@ To add a container to the overlay Network in a swarm
 Quick way to clean up services
 `docker service rm $(docker service ls -q)`
 
-###Docker Storage
+### Docker Storage
 
 To list volumes
 `docker volumes ls`
@@ -213,4 +213,4 @@ To delete a volume
 `docker volume rm myvol`
  - If the volume is in use by the container, you won't be able to delete it
 
-###Docker Secrets
+### Docker Secrets
