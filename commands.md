@@ -180,7 +180,7 @@ To add a container to a specific Network
 `docker container run --rm -d --network harbour-bridge alpine sleep 1d`
 
 To add a container to the overlay Network in a swarm
-`docker service create -d --name app --replicas 2 --network overnet slpine sleep 1d`
+`docker service create -d --name app --replicas 2 --network overnet alpine sleep 1d`
 `docker service ps`
 `docker service ps app`
 `docker network inspect overnet`
@@ -214,3 +214,32 @@ To delete a volume
  - If the volume is in use by the container, you won't be able to delete it
 
 ### Docker Secrets
+To list Secrets
+`docker ls secrets`
+
+To create a secret from a file named classified
+`docker secret create app-sec-v1 ./classified`
+
+To inspect it
+`docker secret inspect wp-sec-v1`
+
+To use it in a service
+`docker service create -d --name app --secret app-sec-v1 alpine sleep 1d`
+
+Inspect the service to see which secret is being used
+`docker service inspect app`
+ - The secret name will be under .Secrets.SecretName
+
+ To view the secret, you can log onto the container and go to:
+ `linux: /run/secrets`
+
+ `Windows: C:\ProgramData\Docker\secrets`
+
+To remove a secret (It must not be in use)
+`docker secret rm app-sec-v1`
+
+WordPress example
+```docker service create -d --replicas 1 --name wp-db --network overnet --secret wp-sec-v1 -e MYSQL_ROOT_PASSWORD_FILE="/run/secrets/wp-sec-v1" mysql:latest
+```
+```docker service create -d --replicas 2 --name wp-fe --network overnet --secret wp-sec-v1 -e WORDPRESS_DB_PASSWORD_FILE="/run/secrets/wp-sec-v1" -e WORDPRESS_DB_HOST="wp-db:3306" -p8080:80 wordpress:latest
+```
