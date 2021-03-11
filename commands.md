@@ -243,3 +243,19 @@ WordPress example
 ```
 ```docker service create -d --replicas 2 --name wp-fe --network overnet --secret wp-sec-v1 -e WORDPRESS_DB_PASSWORD_FILE="/run/secrets/wp-sec-v1" -e WORDPRESS_DB_HOST="wp-db:3306" -p8080:80 wordpress:latest
 ```
+
+### Docker Stacks
+
+To deploy a stack, you need a docker-compose.yml definition file
+`docker stack deploy -c stackfile.yml test-stack`
+ - You can grab a sample one from here
+ `curl -o stackfile.yml https://raw.githubusercontent.com/dockersamples/example-voting-app/master/docker-stack.yml`
+
+To list the stacks
+`docker stack ls`
+
+To see the current status of the stack
+`docker stack ps test-stack`
+
+To see the services inside of a stack
+`docker stack services test-stack`
