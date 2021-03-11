@@ -257,5 +257,11 @@ To list the stacks
 To see the current status of the stack
 `docker stack ps test-stack`
 
-To see the services inside of a stack
+To list the services inside of a stack
 `docker stack services test-stack`
+
+To scale up on the CLI (not recommended)
+`docker service scale test-stack_voter=20`
+
+To inspect the service
+`docker service inspect stack-test_vote --pretty`
