@@ -1,5 +1,15 @@
+To install docker on windows server
+```
+Install-Module -Name DockerMsftProvider -Repository PSGallery -Force
+Install-Package -Name docker -ProviderName DockerMsftProvider -Force
+Restart-Computer -Force
+Start-Service docker
+```
+
+
 To install docker desktop to another drive, create links on your OS before installation.
-```mklink /j "C:\ProgramData\Docker" "E:\Docker\ProgramData\Docker"
+```
+mklink /j "C:\ProgramData\Docker" "E:\Docker\ProgramData\Docker"
 mklink /j "C:\ProgramData\DockerDesktop" "E:\Docker\ProgramData\DockerDesktop"
 mklink /j "C:\Program Files\Docker" "E:\Docker\Program Files\Docker"
 mklink /j "C:\Users\<USER>\AppData\Local\Docker" "E:\Docker\Users\<USER>\AppData\Local\Docker"
